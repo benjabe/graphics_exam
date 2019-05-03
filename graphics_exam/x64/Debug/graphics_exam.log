@@ -1,4 +1,16 @@
 ﻿  Game.cpp
-c:\dev\gfx\graphics_exam\graphics_exam\game.cpp(66): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\game.cpp(93): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\dev\gfx\graphics_exam\dependencies\includes\perlinnoise.hpp(77): warning C4267: '=': conversion from 'size_t' to 'int32_t', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\game.cpp(69): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\game.cpp(96): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Heightmap.cpp
+c:\dev\gfx\graphics_exam\dependencies\includes\perlinnoise.hpp(77): warning C4267: '=': conversion from 'size_t' to 'int32_t', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(47): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(53): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  main.cpp
+c:\dev\gfx\graphics_exam\dependencies\includes\perlinnoise.hpp(77): warning C4267: '=': conversion from 'size_t' to 'int32_t', possible loss of data
+  Generating Code...
   graphics_exam.vcxproj -> C:\dev\gfx\graphics_exam\x64\Debug\graphics_exam.exe

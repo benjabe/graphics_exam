@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include "GameObject.h"
 #include "Cube.h"
+#include "InputHandler.h"
+#include "Heightmap.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -10,6 +12,7 @@
 
 #include <iostream>
 #include <vector> 
+#include <random>
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);

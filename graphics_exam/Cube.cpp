@@ -6,6 +6,7 @@ Cube::Cube(const Shader &shader, const std::string &texture_path)
     : m_texture(Texture(texture_path))
 {
     m_shader = shader;
+    m_position = glm::vec3(0.0f);
     float vertices[] = {
         // positions          // normals           // texture coords
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,

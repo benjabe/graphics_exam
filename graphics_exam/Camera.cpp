@@ -44,6 +44,32 @@ void Camera::process_mouse_movement(float x_offset, float y_offset)
 
     m_yaw += x_offset;
     m_pitch += y_offset;
+
+    update_camera_vectors();
+}
+
+void Camera::update(float delta_time)
+{
+    float speed = m_movement_speed * delta_time;
+    if (InputHandler::get_key("up"))
+    {
+        m_position += m_front * speed;
+    }
+    if (InputHandler::get_key("down"))
+    {
+        m_position -= m_front * speed;
+    }
+    if (InputHandler::get_key("left"))
+    {
+        m_position -= m_right * speed;
+    }
+    if (InputHandler::get_key("right"))
+    {
+        m_position += m_right * speed;
+    }
+
+    m_yaw += InputHandler::get_mouse_offset().x;
+    m_yaw += InputHandler::get_mouse_offset().y;
     if (m_pitch > 89.5f)
     {
         m_pitch = 89.5f;
@@ -52,7 +78,6 @@ void Camera::process_mouse_movement(float x_offset, float y_offset)
     {
         m_pitch = -89.5f;
     }
-
     update_camera_vectors();
 }
 

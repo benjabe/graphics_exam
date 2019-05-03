@@ -57,8 +57,11 @@ void Game::start()
         100.0f
     );
 
-    Shader cube_shader("vertex.shader", "fragment.shader");
-    m_game_objects.push_back(new Cube(cube_shader, "container2.jpg"));
+    //Shader cube_shader("vertex.shader", "fragment.shader");
+    //m_game_objects.push_back(new Cube(cube_shader, "container2.jpg"));
+
+    Shader shader("vertex.shader", "fragment.shader");
+    m_game_objects.push_back(new Heightmap(shader, 5, 5));
 
     while (!glfwWindowShouldClose(m_window))
     {
@@ -105,10 +108,6 @@ void Game::render()
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
-    /*
-    m_width = width;
-    m_height = height;
-    */
     glViewport(0, 0, width, height);
 }
 
