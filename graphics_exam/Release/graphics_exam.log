@@ -1,0 +1,11 @@
+﻿  main.cpp
+main.obj : error LNK2001: unresolved external symbol _glfwSwapBuffers
+main.obj : error LNK2001: unresolved external symbol _glfwSetFramebufferSizeCallback
+main.obj : error LNK2001: unresolved external symbol _glad_glViewport
+main.obj : error LNK2001: unresolved external symbol _glfwTerminate
+main.obj : error LNK2001: unresolved external symbol _glfwPollEvents
+main.obj : error LNK2001: unresolved external symbol _glfwInit
+main.obj : error LNK2001: unresolved external symbol _glfwCreateWindow
+main.obj : error LNK2001: unresolved external symbol _glfwWindowHint
+main.obj : error LNK2001: unresolved external symbol _glfwWindowShouldClose
+C:\dev\gfx\graphics_exam\Release\graphics_exam.exe : fatal error LNK1120: 9 unresolved externals
