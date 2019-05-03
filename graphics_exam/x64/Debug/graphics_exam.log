@@ -1,10 +1,4 @@
 ﻿  Heightmap.cpp
 c:\dev\gfx\graphics_exam\dependencies\includes\perlinnoise.hpp(77): warning C4267: '=': conversion from 'size_t' to 'int32_t', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(54): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(56): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(66): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(153): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(136): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   graphics_exam.vcxproj -> C:\dev\gfx\graphics_exam\x64\Debug\graphics_exam.exe

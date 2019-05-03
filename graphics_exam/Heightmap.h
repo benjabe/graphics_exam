@@ -12,6 +12,13 @@
 #include <vector>
 #include <random>
 
+struct Vertex
+{
+    glm::vec3 position;
+    glm::vec3 color;
+    glm::vec3 normal;
+};
+
 const glm::vec3 COLOR_PEAK = glm::vec3(1.0f, 1.0f, 1.0f);
 const glm::vec3 COLOR_SHORE = glm::vec3(0.52f, 0.48f, 0.0f);
 const glm::vec3 COLOR_MOUNTAIN = glm::vec3(0.46f, 0.31f, 0.22f);
