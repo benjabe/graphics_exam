@@ -146,31 +146,61 @@ void Heightmap::render(const glm::mat4 &projection, const glm::mat4 &view)
 
 float Heightmap::map_height(double x, double y)
 {
+
+    static float max = -9999;
+    static float min = 9999;
+
     float noise = (m_perlin.noise(x * m_xoffset, y * m_yoffset) + 1.0f) / 2.0f;
     float range = m_max_height - m_min_height;
     float z = noise * range + m_min_height;
+    if (noise < min)
+    {
+        min = noise;
+        std::cout << "MIN: " << min << '\n';
+    }
+    if (noise > max)
+    {
+        max = noise;
+        std::cout << "MAX: " << max << '\n';
+    }
     return z;
 }
 
 glm::vec3 Heightmap::height_color(double x, double y)
 {
-    float z = map_height(x, y);
+    float z = map_height(x, y) - m_min_height;
     float range = m_max_height - m_min_height;
     float percentage = z / range * 100.0f;
+    float interpolation_value = 0.0f;
+    glm::vec3 result(0.0f);
     if (percentage < HEIGHT_WATER)
     {
-        return COLOR_WATER;
+        result = COLOR_WATER;
+    }
+    else if (percentage < HEIGHT_SHORE)
+    {
+        // TODO: Switch away from linear interpolation (?)
+        interpolation_value = (percentage - HEIGHT_WATER) / (HEIGHT_SHORE - HEIGHT_WATER);
+        result = (1.0f - interpolation_value) * COLOR_WATER + interpolation_value * COLOR_SHORE;
     }
     else if (percentage < HEIGHT_PLAINS)
     {
-        return (COLOR_WATER + COLOR_PLAINS) / 2.0f;
+        interpolation_value = (percentage - HEIGHT_SHORE) / (HEIGHT_PLAINS - HEIGHT_SHORE);
+        result = (1.0f - interpolation_value) * COLOR_SHORE + interpolation_value * COLOR_PLAINS;
     }
     else if (percentage < HEIGHT_MOUNTAIN)
     {
-        return (COLOR_PLAINS + COLOR_MOUNTAIN) / 2.0f;
+        interpolation_value = (percentage - HEIGHT_PLAINS) / (HEIGHT_MOUNTAIN - HEIGHT_PLAINS);
+        result = (1.0f - interpolation_value) * COLOR_PLAINS + interpolation_value * COLOR_MOUNTAIN;
+    }
+    else if (percentage < HEIGHT_PEAK)
+    {
+        interpolation_value = (percentage - HEIGHT_MOUNTAIN) / (HEIGHT_PEAK - HEIGHT_MOUNTAIN);
+        result = (1.0f - interpolation_value) * COLOR_MOUNTAIN + interpolation_value * COLOR_PEAK;
     }
     else
     {
-        return (COLOR_MOUNTAIN + COLOR_PEAK) / 2.0f;
+        result = COLOR_PEAK;
     }
+    return result;
 }

@@ -57,8 +57,8 @@ void Game::start()
         500.0f
     );
 
-    //Shader cube_shader("vertex.shader", "fragment.shader");
-    //m_game_objects.push_back(new Cube(cube_shader, "container2.jpg"));
+    Shader cube_shader("vertex.shader", "fragment.shader");
+    m_game_objects.push_back(new Cube(cube_shader, "container2.jpg"));
 
     Shader shader("vertex.shader", "fragment.shader");
     m_game_objects.push_back(new Heightmap(shader, 500, 500));

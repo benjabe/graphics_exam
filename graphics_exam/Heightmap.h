@@ -13,14 +13,16 @@
 #include <random>
 
 const glm::vec3 COLOR_PEAK = glm::vec3(1.0f, 1.0f, 1.0f);
-const glm::vec3 COLOR_MOUNTAIN = glm::vec3(1.0f, 0.0f, 1.0f);
+const glm::vec3 COLOR_SHORE = glm::vec3(0.52f, 0.48f, 0.0f);
+const glm::vec3 COLOR_MOUNTAIN = glm::vec3(0.46f, 0.31f, 0.22f);
 const glm::vec3 COLOR_PLAINS = glm::vec3(0.0f, 1.0f, 0.0f);
 const glm::vec3 COLOR_WATER = glm::vec3(0.0f, 0.0f, 1.0f);
 
-const float HEIGHT_WATER = 10.0f;
-const float HEIGHT_PLAINS = 35.0f;
+const float HEIGHT_WATER = 25.0f;
+const float HEIGHT_SHORE = 27.0f;
+const float HEIGHT_PLAINS = 42.0f;
 const float HEIGHT_MOUNTAIN = 70.0f;
-const float HEIGHT_PEAK = 100.0f;
+const float HEIGHT_PEAK = 90.0f;
 
 class Heightmap :
     public GameObject
