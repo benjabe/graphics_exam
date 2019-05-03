@@ -17,52 +17,31 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
     {
         for (int x = 0; x < width; x++)
         {
-            std::cout << x << ", " << y << ":\n";
-
-            float lower_left = dis(gen);
-            float upper_right = dis(gen);
-
             // First triangle
             vertices[index++] = x;
-            vertices[index++] = lower_left;
+            vertices[index++] = noise(x, y);
             vertices[index++] = y;
 
             vertices[index++] = x + 1.0f;
-            vertices[index++] = upper_right;
+            vertices[index++] = noise(x + 1.0f, y + 1.0f);
             vertices[index++] = y + 1.0f;
 
             vertices[index++] = x;
-            vertices[index++] = dis(gen);
+            vertices[index++] = noise(x, y + 1.0f);
             vertices[index++] = y + 1.0f;
-
-            std::cout << "\tFirst triangle:\n";
-            for (int i = 0; i < 3; i++)
-            {
-                std::cout << "\t\t" << vertices[index - 9 + 3 * i]
-                    << ", " << vertices[index - 9 + 3 * i + 1]
-                    << ", " << vertices[index - 9 + 3 * i + 2] << '\n';
-            }
 
             // Second triangle
             vertices[index++] = x;
-            vertices[index++] = lower_left;
+            vertices[index++] = noise(x, y);
             vertices[index++] = y;
 
             vertices[index++] = x + 1.0f;
-            vertices[index++] = dis(gen);
+            vertices[index++] = noise(x + 1.0f, y);
             vertices[index++] = y;
 
             vertices[index++] = x + 1.0f;
-            vertices[index++] = upper_right;
+            vertices[index++] = noise(x + 1.0f, y + 1.0f);
             vertices[index++] = y + 1.0f;
-
-            std::cout << "\tSecond triangle:\n";
-            for (int i = 0; i < 3; i++)
-            {
-                std::cout << "\t\t" << vertices[index - 9 + 3 * i]
-                    << ", " << vertices[index - 9 + 3 * i + 1]
-                    << ", " << vertices[index - 9 + 3 * i + 2] << '\n';
-            }
         }
     }
 
@@ -135,4 +114,12 @@ void Heightmap::render(const glm::mat4 &projection, const glm::mat4 &view)
 
     // Draw the terrain 
     glDrawArrays(GL_TRIANGLES, 0, m_indices / 3);
+}
+
+float Heightmap::noise(double x, double y)
+{
+    float noise = m_perlin.noise(x * m_xoffset, y * m_yoffset);
+    float range = m_max_height - m_min_height;
+    float z = noise * range + m_min_height;
+    return z;
 }

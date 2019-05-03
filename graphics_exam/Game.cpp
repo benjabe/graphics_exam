@@ -1,6 +1,6 @@
 #include "Game.h"
 
-
+Camera camera;
 
 Game::Game(unsigned int width, unsigned int height)
 {
@@ -54,14 +54,14 @@ void Game::start()
         glm::radians(90.0f), 
         (float)m_width / (float)m_height, 
         0.1f, 
-        100.0f
+        500.0f
     );
 
     //Shader cube_shader("vertex.shader", "fragment.shader");
     //m_game_objects.push_back(new Cube(cube_shader, "container2.jpg"));
 
     Shader shader("vertex.shader", "fragment.shader");
-    m_game_objects.push_back(new Heightmap(shader, 5, 5));
+    m_game_objects.push_back(new Heightmap(shader, 500, 500));
 
     while (!glfwWindowShouldClose(m_window))
     {
@@ -96,7 +96,7 @@ void Game::render()
     glClearColor(0.2f, 0.3, 0.3, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    m_view = m_camera.get_view_matrix();
+    m_view = camera.get_view_matrix();
 
     for (GameObject *go : m_game_objects)
     {
@@ -113,18 +113,18 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 
 void mouse_callback(GLFWwindow *window, double xpos, double ypos)
 {
-    /*
-    if (m_first_mouse)
+    static bool s_first_mouse = true;
+    static glm::vec2 s_last_mouse_pos = { 0.0f, 0.0f };
+    if (s_first_mouse)
     {
-        m_last_mouse_pos = { xpos, ypos };
-        m_first_mouse = false;
+        s_last_mouse_pos = { xpos, ypos };
+        s_first_mouse = false;
     }
-    float x_offset = xpos - m_last_mouse_pos.x;
-    float y_offset = m_last_mouse_pos.y - ypos;
-    m_last_mouse_pos = { xpos, ypos };
+    float x_offset = xpos - s_last_mouse_pos.x;
+    float y_offset = s_last_mouse_pos.y - ypos;
+    s_last_mouse_pos = { xpos, ypos };
 
-    m_camera.process_mouse_movement(x_offset, y_offset);
-    */
+    camera.process_mouse_movement(x_offset, y_offset);
 }
 
 void Game::process_input(GLFWwindow *window, float delta_time)
@@ -136,18 +136,18 @@ void Game::process_input(GLFWwindow *window, float delta_time)
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
-        m_camera.process_keyboard(FORWARD, delta_time);
+        camera.process_keyboard(FORWARD, delta_time);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
-        m_camera.process_keyboard(BACKWARD, delta_time);
+        camera.process_keyboard(BACKWARD, delta_time);
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
     {
-        m_camera.process_keyboard(LEFT, delta_time);
+        camera.process_keyboard(LEFT, delta_time);
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
-        m_camera.process_keyboard(RIGHT, delta_time);
+        camera.process_keyboard(RIGHT, delta_time);
     }
 }

@@ -3,8 +3,8 @@
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
 {
     m_front = glm::vec3(0.0f, 0.0f, -1.0f);
-    m_movement_speed = 5.0f;
-    m_sensitivity = 1.5f;
+    m_movement_speed = 42.0f;
+    m_sensitivity = 1.0f;
     m_zoom = 90.0f;
 
     m_position = position;
