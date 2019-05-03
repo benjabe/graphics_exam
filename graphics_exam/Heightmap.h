@@ -12,7 +12,15 @@
 #include <vector>
 #include <random>
 
+const glm::vec3 COLOR_PEAK = glm::vec3(1.0f, 1.0f, 1.0f);
+const glm::vec3 COLOR_MOUNTAIN = glm::vec3(1.0f, 0.0f, 1.0f);
+const glm::vec3 COLOR_PLAINS = glm::vec3(0.0f, 1.0f, 0.0f);
+const glm::vec3 COLOR_WATER = glm::vec3(0.0f, 0.0f, 1.0f);
 
+const float HEIGHT_WATER = 10.0f;
+const float HEIGHT_PLAINS = 35.0f;
+const float HEIGHT_MOUNTAIN = 70.0f;
+const float HEIGHT_PEAK = 100.0f;
 
 class Heightmap :
     public GameObject
@@ -34,6 +42,7 @@ public:
     virtual void update(float delta_time);
     void render(const glm::mat4 &projection, const glm::mat4 &view);
 private:
-    float noise(double x, double y);
+    float map_height(double x, double y);
+    glm::vec3 height_color(double x, double y);
 };
 

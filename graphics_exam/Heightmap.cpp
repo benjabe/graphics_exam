@@ -10,38 +10,75 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
     // TODO: Generate heightmap
 
     // Create vertices
-    m_indices = width * height * 6 * 3;
+    m_indices = width * height * 6 * (3 + 3);
     float *vertices = new float[m_indices];
     int index = 0;
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
         {
+            glm::vec3 color;
             // First triangle
+            // Position
             vertices[index++] = x;
-            vertices[index++] = noise(x, y);
+            vertices[index++] = map_height(x, y);
             vertices[index++] = y;
+            // Color
+            color = height_color(x, y);
+            vertices[index++] = color.r;
+            vertices[index++] = color.g;
+            vertices[index++] = color.b;
 
+            // Position
             vertices[index++] = x + 1.0f;
-            vertices[index++] = noise(x + 1.0f, y + 1.0f);
+            vertices[index++] = map_height(x + 1.0f, y + 1.0f);
             vertices[index++] = y + 1.0f;
+            // Color
+            color = height_color(x + 1.0f, y + 1.0f);
+            vertices[index++] = color.r;
+            vertices[index++] = color.g;
+            vertices[index++] = color.b;
 
+            // Position
             vertices[index++] = x;
-            vertices[index++] = noise(x, y + 1.0f);
+            vertices[index++] = map_height(x, y + 1.0f);
             vertices[index++] = y + 1.0f;
+            // Color
+            color = height_color(x, y + 1.0f);
+            vertices[index++] = color.r;
+            vertices[index++] = color.g;
+            vertices[index++] = color.b;
 
             // Second triangle
+            // Position
             vertices[index++] = x;
-            vertices[index++] = noise(x, y);
+            vertices[index++] = map_height(x, y);
             vertices[index++] = y;
+            // Color
+            color = height_color(x, y);
+            vertices[index++] = color.r;
+            vertices[index++] = color.g;
+            vertices[index++] = color.b;
 
+            // Position
             vertices[index++] = x + 1.0f;
-            vertices[index++] = noise(x + 1.0f, y);
+            vertices[index++] = map_height(x + 1.0f, y);
             vertices[index++] = y;
+            // Color
+            color = height_color(x + 1.0f, y);
+            vertices[index++] = color.r;
+            vertices[index++] = color.g;
+            vertices[index++] = color.b;
 
+            // Position
             vertices[index++] = x + 1.0f;
-            vertices[index++] = noise(x + 1.0f, y + 1.0f);
+            vertices[index++] = map_height(x + 1.0f, y + 1.0f);
             vertices[index++] = y + 1.0f;
+            // Color
+            color = height_color(x + 1.0f, y + 1.0f);
+            vertices[index++] = color.r;
+            vertices[index++] = color.g;
+            vertices[index++] = color.b;
         }
     }
 
@@ -56,35 +93,26 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
         vertices,
         GL_STATIC_DRAW
     );
+    // Position
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(
         0,
         3,
         GL_FLOAT,
         GL_FALSE,
-        3 * sizeof(float),
+        6 * sizeof(float),
         (void*)0
     );
-    /*
+    // Color
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(
         1,
         3,
         GL_FLOAT,
         GL_FALSE,
-        8 * sizeof(float),
+        6 * sizeof(float),
         (void*)(3 * sizeof(float))
     );
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(
-        2,
-        2,
-        GL_FLOAT,
-        GL_FALSE,
-        8 * sizeof(float),
-        (void*)(6 * sizeof(float))
-    );
-    */
 }
 
 Heightmap::Heightmap(const std::string &path)
@@ -113,13 +141,36 @@ void Heightmap::render(const glm::mat4 &projection, const glm::mat4 &view)
     m_shader.set_mat4("model", model);
 
     // Draw the terrain 
-    glDrawArrays(GL_TRIANGLES, 0, m_indices / 3);
+    glDrawArrays(GL_TRIANGLES, 0, m_indices / 6);
 }
 
-float Heightmap::noise(double x, double y)
+float Heightmap::map_height(double x, double y)
 {
     float noise = (m_perlin.noise(x * m_xoffset, y * m_yoffset) + 1.0f) / 2.0f;
     float range = m_max_height - m_min_height;
     float z = noise * range + m_min_height;
     return z;
+}
+
+glm::vec3 Heightmap::height_color(double x, double y)
+{
+    float z = map_height(x, y);
+    float range = m_max_height - m_min_height;
+    float percentage = z / range * 100.0f;
+    if (percentage < HEIGHT_WATER)
+    {
+        return COLOR_WATER;
+    }
+    else if (percentage < HEIGHT_PLAINS)
+    {
+        return (COLOR_WATER + COLOR_PLAINS) / 2.0f;
+    }
+    else if (percentage < HEIGHT_MOUNTAIN)
+    {
+        return (COLOR_PLAINS + COLOR_MOUNTAIN) / 2.0f;
+    }
+    else
+    {
+        return (COLOR_MOUNTAIN + COLOR_PEAK) / 2.0f;
+    }
 }

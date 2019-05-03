@@ -17,6 +17,7 @@ struct Light
 
 out vec4 frag_color;
 
+in vec3 vertex_color;
 in vec2 tex_coords;
 in vec3 normal;
 in vec3 frag_pos;
@@ -45,5 +46,6 @@ void main()
 
     // final colour
     vec3 result = ambient + diffuse + specular;
-    frag_color = vec4(0.0f, (100.0f - frag_pos.g) / 120.0f, 0.0f, 1.0f); //texture(tex, tex_coords); //vec4(result, 1.0);
+    frag_color = vec4(vertex_color, 1.0f);
+    //frag_color = vec4(0.0f, (100.0f - frag_pos.g) / 120.0f, 0.0f, 1.0f); //texture(tex, tex_coords); //vec4(result, 1.0);
 }
