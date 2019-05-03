@@ -23,10 +23,10 @@ private:
     siv::PerlinNoise m_perlin;
     
     // for height generation
-    double m_xoffset = 0.025;
-    double m_yoffset = 0.025f;
+    double m_xoffset = 0.005;
+    double m_yoffset = 0.009f;
     float m_min_height = 0.0f;
-    float m_max_height = 34.0f;
+    float m_max_height = 100.0f;
 public:
     Heightmap(const Shader &shader, int width = 20, int height = 20);
     Heightmap(const std::string & path);

@@ -45,5 +45,5 @@ void main()
 
     // final colour
     vec3 result = ambient + diffuse + specular;
-    frag_color = vec4(0.0f, (40.0f - frag_pos.g) / 120.0f, 0.0f, 1.0f); //texture(tex, tex_coords); //vec4(result, 1.0);
+    frag_color = vec4(0.0f, (100.0f - frag_pos.g) / 120.0f, 0.0f, 1.0f); //texture(tex, tex_coords); //vec4(result, 1.0);
 }

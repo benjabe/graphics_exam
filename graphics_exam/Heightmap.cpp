@@ -118,7 +118,7 @@ void Heightmap::render(const glm::mat4 &projection, const glm::mat4 &view)
 
 float Heightmap::noise(double x, double y)
 {
-    float noise = m_perlin.noise(x * m_xoffset, y * m_yoffset);
+    float noise = (m_perlin.noise(x * m_xoffset, y * m_yoffset) + 1.0f) / 2.0f;
     float range = m_max_height - m_min_height;
     float z = noise * range + m_min_height;
     return z;
