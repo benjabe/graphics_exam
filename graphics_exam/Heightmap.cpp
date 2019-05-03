@@ -34,6 +34,20 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
                 glm::vec3(1.0f)
             };
 
+            // Normal
+            glm::vec3 u = vertices[index - 2].position - vertices[index - 3].position;
+            glm::vec3 v = vertices[index - 1].position - vertices[index - 3].position;
+            glm::vec3 normal{
+                u.y * v.z - u.z * v.y,
+                u.z * v.x - u.x * v.z,
+                u.x * v.y - u.y * v.x
+            };
+            // apply normal
+            for (int i = 0; i < 3; i++)
+            {
+                vertices[index - i].normal = normal;
+            }
+
             // Triangle 2
             vertices[index++] = {
                 { x, map_height(x, y), y }, // Position
@@ -52,6 +66,20 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
                 height_color(x + 1.0f, y + 1.0f),
                 glm::vec3(1.0f)
             };
+
+            // Normal (should be a lambda or something but but)
+            u = vertices[index - 2].position - vertices[index - 3].position;
+            v = vertices[index - 1].position - vertices[index - 3].position;
+            normal = {
+                u.y * v.z - u.z * v.y,
+                u.z * v.x - u.x * v.z,
+                u.x * v.y - u.y * v.x
+            };
+            // apply normal
+            for (int i = 0; i < 3; i++)
+            {
+                vertices[index - i].normal = normal;
+            }
         }
     }
 
