@@ -22,6 +22,7 @@ private:
     bool m_gamma_correction;
 
  public:
+    Model();
     Model(const char *path);
     void draw(Shader shader);
 

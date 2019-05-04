@@ -6,6 +6,8 @@
 #include "InputHandler.h"
 #include "Heightmap.h"
 #include "Light.h"
+#include "Model.h"
+#include "Raindrop.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -40,6 +42,8 @@ private:
     // Lights
     DirectionalLight m_directional_light;
     std::vector<PointLight> m_point_lights;
+    Model m_model;
+    Shader m_model_shader;
 public:
     Game(unsigned int width, unsigned int height);
     ~Game();

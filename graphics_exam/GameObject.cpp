@@ -23,4 +23,5 @@ void GameObject::render(
     const std::vector<PointLight> &point_lights
 )
 {
+    std::cout << "Hello\n";
 }

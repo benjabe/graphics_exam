@@ -7,11 +7,9 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
     m_position = glm::vec3(-1.0f);
     m_shader = shader;
 
-    // TODO: Generate heightmap
-
     // Create vertices
-    m_indices = width * height * 6;
-    Vertex *vertices = new Vertex[m_indices];
+    m_vertices = width * height * 6;
+    Vertex *vertices = new Vertex[m_vertices];
     int index = 0;
     for (int y = 0; y < height; y++)
     {
@@ -90,7 +88,7 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(
         GL_ARRAY_BUFFER,
-        m_indices * sizeof(Vertex),
+        m_vertices * sizeof(Vertex),
         vertices,
         GL_STATIC_DRAW
     );
@@ -211,7 +209,7 @@ void Heightmap::render(
     }
 
     // Draw the terrain 
-    glDrawArrays(GL_TRIANGLES, 0, m_indices);
+    glDrawArrays(GL_TRIANGLES, 0, m_vertices);
 }
 
 float Heightmap::map_height(double x, double y)

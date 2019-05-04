@@ -63,6 +63,7 @@ void Game::start()
 
     Shader shader("vertex.shader", "fragment.shader");
     m_game_objects.push_back(new Heightmap(shader, 800, 800));
+    m_game_objects.push_back(new Raindrop());
 
     // Add light
     m_directional_light = {
@@ -71,6 +72,9 @@ void Game::start()
         { 0.5f, 0.5f, 0.5f },
         { 0.6f, 0.6f, 0.6f }
     };
+
+    m_model = Model("Assets/Models/Raindrop/raindrop.obj");
+    m_model_shader = Shader("model_loading.vert", "model_loading.frag");
 
     while (!glfwWindowShouldClose(m_window))
     {
@@ -130,6 +134,7 @@ void Game::render()
             m_point_lights
         );
     }
+
 
     glfwSwapBuffers(m_window);
 }

@@ -2,6 +2,10 @@
 
 
 
+Model::Model()
+{
+}
+
 Model::Model(const char *path)
 {
     load_model(path);
@@ -50,13 +54,13 @@ void Model::process_node(aiNode * node, const aiScene * scene)
 
 Mesh Model::process_mesh(aiMesh * mesh, const aiScene * scene)
 {
-    std::vector<Vertex> vertices;
+    std::vector<MeshVertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
 
     for (unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
-        Vertex vertex;
+        MeshVertex vertex;
 
         glm::vec3 vector;
         vector.x = mesh->mVertices[i].x;

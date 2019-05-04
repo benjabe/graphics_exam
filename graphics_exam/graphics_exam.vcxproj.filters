@@ -57,6 +57,9 @@
     <ClCompile Include="Heightmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Raindrop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.shader">
@@ -69,6 +72,9 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="model_loading.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="raindrop.frag">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
@@ -108,6 +114,9 @@
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Raindrop.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

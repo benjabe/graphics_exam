@@ -30,6 +30,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Raindrop.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image_loader.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -38,6 +39,7 @@
     <None Include="fragment.shader" />
     <None Include="model_loading.frag" />
     <None Include="model_loading.vert" />
+    <None Include="raindrop.frag" />
     <None Include="vertex.shader" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +53,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Raindrop.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>

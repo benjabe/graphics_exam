@@ -34,7 +34,7 @@ class Heightmap :
     public GameObject
 {
 private:
-    int m_indices;
+    int m_vertices;
     siv::PerlinNoise m_perlin;
     
     // for height generation

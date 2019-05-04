@@ -2,7 +2,7 @@
 
 
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+Mesh::Mesh(std::vector<MeshVertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
 {
     m_vertices = vertices;
     m_indices = indices;
@@ -54,7 +54,7 @@ void Mesh::setup_mesh()
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
     glBufferData(
         GL_ARRAY_BUFFER,
-        m_vertices.size() * sizeof(Vertex),
+        m_vertices.size() * sizeof(MeshVertex),
         &m_vertices[0],
         GL_STATIC_DRAW
     );
@@ -74,7 +74,7 @@ void Mesh::setup_mesh()
         3,
         GL_FLOAT,
         GL_FALSE,
-        sizeof(Vertex),
+        sizeof(MeshVertex),
         (void*)0
     );
     // Vertex normals
@@ -84,8 +84,8 @@ void Mesh::setup_mesh()
         3,
         GL_FLOAT,
         GL_FALSE,
-        sizeof(Vertex),
-        (void*)offsetof(Vertex, normal)
+        sizeof(MeshVertex),
+        (void*)offsetof(MeshVertex, normal)
     );
     // Vertex texture coordinates
     glEnableVertexAttribArray(2);
@@ -94,8 +94,8 @@ void Mesh::setup_mesh()
         2,
         GL_FLOAT,
         GL_FALSE,
-        sizeof(Vertex),
-        (void*)offsetof(Vertex, tex_coords)
+        sizeof(MeshVertex),
+        (void*)offsetof(MeshVertex, tex_coords)
     );
 
     glBindVertexArray(0);
