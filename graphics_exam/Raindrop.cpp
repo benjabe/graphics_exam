@@ -16,12 +16,18 @@ Raindrop::~Raindrop()
 {
 }
 
+void Raindrop::update(float delta_time)
+{
+    m_speed += m_gravity * delta_time;
+    m_position.y += m_speed * delta_time;
+}
+
 void Raindrop::render(const glm::mat4 & projection, const glm::mat4 & view, const glm::vec3 & view_position, const DirectionalLight & directional_light, const std::vector<PointLight>& point_lights)
 {
     // Set up shader
     m_shader.use();
     glm::mat4 model(1.0f);
-    model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+    model = glm::translate(model, m_position);
     m_shader.set_mat4("model", model);
     m_shader.set_mat4("view", view);
     m_shader.set_mat4("projection", projection);

@@ -9,9 +9,12 @@ class Raindrop :
 {
 private:
     Model m_model;
+    float m_speed = 0.0f;
+    float m_gravity = -1.0f;
 public:
     Raindrop();
     ~Raindrop();
+    void update(float delta_time);
     virtual void render(
         const glm::mat4 &projection,
         const glm::mat4 &view,
