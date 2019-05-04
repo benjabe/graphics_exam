@@ -24,11 +24,11 @@ const glm::vec3 COLOR_MOUNTAIN = glm::vec3(0.46f, 0.31f, 0.22f);
 const glm::vec3 COLOR_PLAINS = glm::vec3(0.0f, 1.0f, 0.0f);
 const glm::vec3 COLOR_WATER = glm::vec3(0.0f, 0.0f, 1.0f);
 
-const float HEIGHT_WATER = 25.0f;
-const float HEIGHT_SHORE = 27.0f;
-const float HEIGHT_PLAINS = 42.0f;
-const float HEIGHT_MOUNTAIN = 70.0f;
-const float HEIGHT_PEAK = 90.0f;
+const float HEIGHT_WATER = 0.0f;
+const float HEIGHT_SHORE = 3.0f;
+const float HEIGHT_PLAINS = 21.0f;
+const float HEIGHT_MOUNTAIN = 64.0f;
+const float HEIGHT_PEAK = 72.0f;
 
 class Heightmap :
     public GameObject
@@ -38,10 +38,10 @@ private:
     siv::PerlinNoise m_perlin;
     
     // for height generation
-    double m_xoffset = 0.005;
-    double m_yoffset = 0.009f;
-    float m_min_height = 0.0f;
-    float m_max_height = 100.0f;
+    double m_xoffset = 0.01;
+    double m_yoffset = 0.02f;
+    float m_min_height = -20.0f;
+    float m_max_height = 90.0f;
 public:
     Heightmap(const Shader &shader, int width = 20, int height = 20);
     Heightmap(const std::string & path);
@@ -50,6 +50,7 @@ public:
     virtual void render(
         const glm::mat4 &projection,
         const glm::mat4 &view,
+        const glm::vec3 &view_position,
         const DirectionalLight &directional_light
     );
 private:

@@ -142,6 +142,7 @@ void Heightmap::update(float delta_time)
 void Heightmap::render(
     const glm::mat4 &projection,
     const glm::mat4 &view,
+    const glm::vec3 &view_position,
     const DirectionalLight &directional_light)
 {
     glBindVertexArray(m_vao);
@@ -150,6 +151,7 @@ void Heightmap::render(
     m_shader.use();
     m_shader.set_mat4("projection", projection);
     m_shader.set_mat4("view", view);
+    m_shader.set_vec3("view_pos", view_position);
     glm::mat4 model(1.0f);
     model = glm::translate(model, m_position);
     m_shader.set_mat4("model", model);
@@ -171,7 +173,7 @@ void Heightmap::render(
     );
     m_shader.set_float("material.diffuse", 0.2f);
     m_shader.set_float("material.specular", 0.1f);
-    m_shader.set_float("material.shininess", 128.0f);
+    m_shader.set_float("material.shininess", 512.0f);
 
     // Draw the terrain 
     glDrawArrays(GL_TRIANGLES, 0, m_indices);
@@ -199,34 +201,34 @@ float Heightmap::map_height(double x, double y)
 
 glm::vec3 Heightmap::height_color(double x, double y)
 {
-    float z = map_height(x, y) - m_min_height;
+    float z = map_height(x, y);
     float range = m_max_height - m_min_height;
     float percentage = z / range * 100.0f;
     float interpolation_value = 0.0f;
     glm::vec3 result(0.0f);
-    if (percentage < HEIGHT_WATER)
+    if (z < HEIGHT_WATER)
     {
         result = COLOR_WATER;
     }
-    else if (percentage < HEIGHT_SHORE)
+    else if (z < HEIGHT_SHORE)
     {
         // TODO: Switch away from linear interpolation (?)
-        interpolation_value = (percentage - HEIGHT_WATER) / (HEIGHT_SHORE - HEIGHT_WATER);
+        interpolation_value = (z - HEIGHT_WATER) / (HEIGHT_SHORE - HEIGHT_WATER);
         result = (1.0f - interpolation_value) * COLOR_WATER + interpolation_value * COLOR_SHORE;
     }
-    else if (percentage < HEIGHT_PLAINS)
+    else if (z < HEIGHT_PLAINS)
     {
-        interpolation_value = (percentage - HEIGHT_SHORE) / (HEIGHT_PLAINS - HEIGHT_SHORE);
+        interpolation_value = (z - HEIGHT_SHORE) / (HEIGHT_PLAINS - HEIGHT_SHORE);
         result = (1.0f - interpolation_value) * COLOR_SHORE + interpolation_value * COLOR_PLAINS;
     }
-    else if (percentage < HEIGHT_MOUNTAIN)
+    else if (z < HEIGHT_MOUNTAIN)
     {
-        interpolation_value = (percentage - HEIGHT_PLAINS) / (HEIGHT_MOUNTAIN - HEIGHT_PLAINS);
+        interpolation_value = (z - HEIGHT_PLAINS) / (HEIGHT_MOUNTAIN - HEIGHT_PLAINS);
         result = (1.0f - interpolation_value) * COLOR_PLAINS + interpolation_value * COLOR_MOUNTAIN;
     }
-    else if (percentage < HEIGHT_PEAK)
+    else if (z < HEIGHT_PEAK)
     {
-        interpolation_value = (percentage - HEIGHT_MOUNTAIN) / (HEIGHT_PEAK - HEIGHT_MOUNTAIN);
+        interpolation_value = (z - HEIGHT_MOUNTAIN) / (HEIGHT_PEAK - HEIGHT_MOUNTAIN);
         result = (1.0f - interpolation_value) * COLOR_MOUNTAIN + interpolation_value * COLOR_PEAK;
     }
     else

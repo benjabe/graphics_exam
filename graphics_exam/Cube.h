@@ -15,6 +15,10 @@ public:
     Cube(const Shader &shader, const std::string &texture_path);
     ~Cube();
     virtual void update(float delta_time);
-    virtual void render(const glm::mat4 &projection, const glm::mat4 &view);
+    virtual void render(
+        const glm::mat4 &projection,
+        const glm::mat4 &view,
+        const DirectionalLight &directional_light
+    );
 };
 

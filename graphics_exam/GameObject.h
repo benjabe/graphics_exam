@@ -25,6 +25,7 @@ public:
     virtual void render(
         const glm::mat4 &projection,
         const glm::mat4 &view,
+        const glm::vec3 &view_position,
         const DirectionalLight &directional_light
     );
 };
