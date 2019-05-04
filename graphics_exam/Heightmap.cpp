@@ -176,38 +176,38 @@ void Heightmap::render(
     m_shader.set_float("material.specular", 0.1f);
     m_shader.set_float("material.shininess", 512.0f);
 
-    m_shader.set_float("nr_point_lights", point_lights.size());
-    std::cout << point_lights.size() << '\n';
+    m_shader.set_int("nr_point_lights", point_lights.size());
     for (int i = 0; i < point_lights.size(); i++)
     {
         std::stringstream string;
         string << "point_lights[" << i << "].position";
         m_shader.set_vec3(string.str(), point_lights[i].position);
-        string.clear();
+        string.str(std::string());
 
         string << "point_lights[" << i << "].ambient";
         m_shader.set_vec3(string.str(), point_lights[i].ambient);
-        string.clear();
+        string.str(std::string());
 
         string << "point_lights[" << i << "].diffuse";
         m_shader.set_vec3(string.str(), point_lights[i].diffuse);
         string.clear();
+        string.str(std::string());
 
         string << "point_lights[" << i << "].specular";
         m_shader.set_vec3(string.str(), point_lights[i].specular);
-        string.clear();
+        string.str(std::string());
 
         string << "point_lights[" << i << "].constant";
         m_shader.set_float(string.str(), point_lights[i].constant);
-        string.clear();
+        string.str(std::string());
 
         string << "point_lights[" << i << "].linear";
         m_shader.set_float(string.str(), point_lights[i].linear);
-        string.clear();
+        string.str(std::string());
 
         string << "point_lights[" << i << "].quadratic";
         m_shader.set_float(string.str(), point_lights[i].quadratic);
-        string.clear();
+        string.str(std::string());
     }
 
     // Draw the terrain 
