@@ -39,6 +39,7 @@ private:
 
     // Lights
     DirectionalLight m_directional_light;
+    std::vector<PointLight> m_point_lights;
 public:
     Game(unsigned int width, unsigned int height);
     ~Game();
@@ -46,5 +47,6 @@ public:
     void update(float delta_time);
     void render();
     void process_input(GLFWwindow *window, float delta_time);
+    void add_point_light(glm::vec3 position);
 };
 

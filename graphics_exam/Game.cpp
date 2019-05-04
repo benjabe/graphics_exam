@@ -92,6 +92,19 @@ void Game::start()
     }
 }
 
+void Game::add_point_light(glm::vec3 position)
+{
+    m_point_lights.push_back({
+        position,
+        { 0.2f, 0.2f, 0.2f },
+        { 0.5f, 0.5f, 0.5f },
+        { 0.6f, 0.6f, 0.6f },
+        1.0f,
+        0.09f,
+        0.032f
+    });
+}
+
 void Game::update(float delta_time)
 {
     for (GameObject *go : m_game_objects)
@@ -113,7 +126,8 @@ void Game::render()
             m_projection,
             m_view,
             camera.get_position(),
-            m_directional_light
+            m_directional_light,
+            m_point_lights
         );
     }
 
@@ -163,5 +177,10 @@ void Game::process_input(GLFWwindow *window, float delta_time)
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
         camera.process_keyboard(RIGHT, delta_time);
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
+    {
+        add_point_light(camera.get_position());
     }
 }

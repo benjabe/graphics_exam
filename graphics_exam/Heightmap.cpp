@@ -143,7 +143,8 @@ void Heightmap::render(
     const glm::mat4 &projection,
     const glm::mat4 &view,
     const glm::vec3 &view_position,
-    const DirectionalLight &directional_light)
+    const DirectionalLight &directional_light,
+    const std::vector<PointLight> &point_lights)
 {
     glBindVertexArray(m_vao);
 
@@ -174,6 +175,40 @@ void Heightmap::render(
     m_shader.set_float("material.diffuse", 0.2f);
     m_shader.set_float("material.specular", 0.1f);
     m_shader.set_float("material.shininess", 512.0f);
+
+    m_shader.set_float("nr_point_lights", point_lights.size());
+    std::cout << point_lights.size() << '\n';
+    for (int i = 0; i < point_lights.size(); i++)
+    {
+        std::stringstream string;
+        string << "point_lights[" << i << "].position";
+        m_shader.set_vec3(string.str(), point_lights[i].position);
+        string.clear();
+
+        string << "point_lights[" << i << "].ambient";
+        m_shader.set_vec3(string.str(), point_lights[i].ambient);
+        string.clear();
+
+        string << "point_lights[" << i << "].diffuse";
+        m_shader.set_vec3(string.str(), point_lights[i].diffuse);
+        string.clear();
+
+        string << "point_lights[" << i << "].specular";
+        m_shader.set_vec3(string.str(), point_lights[i].specular);
+        string.clear();
+
+        string << "point_lights[" << i << "].constant";
+        m_shader.set_float(string.str(), point_lights[i].constant);
+        string.clear();
+
+        string << "point_lights[" << i << "].linear";
+        m_shader.set_float(string.str(), point_lights[i].linear);
+        string.clear();
+
+        string << "point_lights[" << i << "].quadratic";
+        m_shader.set_float(string.str(), point_lights[i].quadratic);
+        string.clear();
+    }
 
     // Draw the terrain 
     glDrawArrays(GL_TRIANGLES, 0, m_indices);
