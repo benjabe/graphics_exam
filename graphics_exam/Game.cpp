@@ -97,8 +97,8 @@ void Game::add_point_light(glm::vec3 position)
     m_point_lights.push_back({
         position,
         { 0.2f, 0.2f, 0.2f },
-        { 0.5f, 0.5f, 0.5f },
-        { 0.6f, 0.6f, 0.6f },
+        { 0.9f, 0.2f, 0.9f },
+        { 1.0f, 0.3f, 1.0f },
         1.0f,
         0.09f,
         0.032f
