@@ -39,7 +39,7 @@ private:
     
     // for height generation
     double m_xoffset = 0.01;
-    double m_yoffset = 0.02f;
+    double m_yoffset = 0.013f;
     float m_min_height = -20.0f;
     float m_max_height = 90.0f;
 public:

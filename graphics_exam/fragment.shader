@@ -37,6 +37,7 @@ void main()
 
 vec3 calc_dir_light(DirectionalLight light, vec3 normal, vec3 view_dir)
 {
+    //normal = vec3(0.0f, 1.0f, 0.0f); // Debugging
     vec3 light_dir = normalize(-light.direction);
 
     // Diffuse shading

@@ -43,7 +43,7 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
                 u.x * v.y - u.y * v.x
             };
             // apply normal
-            for (int i = 0; i < 3; i++)
+            for (int i = 1; i < 4; i++)
             {
                 vertices[index - i].normal = normal;
             }
@@ -76,7 +76,7 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
                 u.x * v.y - u.y * v.x
             };
             // apply normal
-            for (int i = 0; i < 3; i++)
+            for (int i = 1; i < 4; i++)
             {
                 vertices[index - i].normal = normal;
             }
