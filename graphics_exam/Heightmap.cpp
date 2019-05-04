@@ -139,7 +139,10 @@ void Heightmap::update(float delta_time)
 {
 }
 
-void Heightmap::render(const glm::mat4 &projection, const glm::mat4 &view)
+void Heightmap::render(
+    const glm::mat4 &projection,
+    const glm::mat4 &view,
+    const DirectionalLight &directional_light)
 {
     glBindVertexArray(m_vao);
 
@@ -150,6 +153,25 @@ void Heightmap::render(const glm::mat4 &projection, const glm::mat4 &view)
     glm::mat4 model(1.0f);
     model = glm::translate(model, m_position);
     m_shader.set_mat4("model", model);
+    m_shader.set_vec3(
+        "directional_light.direction",
+        directional_light.direction
+    );
+    m_shader.set_vec3(
+        "directional_light.ambient",
+        directional_light.ambient
+    );
+    m_shader.set_vec3(
+        "directional_light.diffuse",
+        directional_light.diffuse
+    );
+    m_shader.set_vec3(
+        "directional_light.specular",
+        directional_light.specular
+    );
+    m_shader.set_float("material.diffuse", 0.2f);
+    m_shader.set_float("material.specular", 0.1f);
+    m_shader.set_float("material.shininess", 128.0f);
 
     // Draw the terrain 
     glDrawArrays(GL_TRIANGLES, 0, m_indices);
@@ -167,12 +189,10 @@ float Heightmap::map_height(double x, double y)
     if (noise < min)
     {
         min = noise;
-        std::cout << "MIN: " << min << '\n';
     }
     if (noise > max)
     {
         max = noise;
-        std::cout << "MAX: " << max << '\n';
     }
     return z;
 }

@@ -48,6 +48,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Heightmap.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Shader.h" />

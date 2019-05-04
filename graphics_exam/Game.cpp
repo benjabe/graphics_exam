@@ -57,11 +57,20 @@ void Game::start()
         500.0f
     );
 
+    // Add game objects
     Shader cube_shader("vertex.shader", "fragment.shader");
     m_game_objects.push_back(new Cube(cube_shader, "container2.jpg"));
 
     Shader shader("vertex.shader", "fragment.shader");
     m_game_objects.push_back(new Heightmap(shader, 500, 500));
+
+    // Add light
+    m_directional_light = {
+        { 1.0f, 0.1f, 0.3f },
+        { 0.2f, 0.2f, 0.2f },
+        { 0.5f, 0.5f, 0.5f },
+        { 1.0f, 1.0f, 1.0f }
+    };
 
     while (!glfwWindowShouldClose(m_window))
     {
@@ -100,7 +109,7 @@ void Game::render()
 
     for (GameObject *go : m_game_objects)
     {
-        go->render(m_projection, m_view);
+        go->render(m_projection, m_view, m_directional_light);
     }
 
     glfwSwapBuffers(m_window);

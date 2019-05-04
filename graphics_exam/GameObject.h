@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Component.h"
+#include "Light.h"
+#include "Shader.h"
 
 #include <glm/glm.hpp>
 
@@ -10,9 +12,9 @@ class GameObject
 {
 protected:
     unsigned int m_vao;
-    unsigned int m_shader;
+    Shader m_shader;
 
-    glm::vec3 m_position;
+    glm::vec3 m_position = { 0.0f, 0.0f, 0.0f };
     glm::vec3 m_scale;
     glm::vec3 m_rotation;
 
@@ -20,6 +22,10 @@ public:
     GameObject();
     ~GameObject();
     virtual void update(float delta_time);
-    virtual void render(const glm::mat4 &projection, const glm::mat4 &view);
+    virtual void render(
+        const glm::mat4 &projection,
+        const glm::mat4 &view,
+        const DirectionalLight &directional_light
+    );
 };
 

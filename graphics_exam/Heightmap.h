@@ -8,7 +8,6 @@
 #include <glm/gtx/string_cast.hpp>
 #include <PerlinNoise.hpp>
 
-#include <iostream>
 #include <vector>
 #include <random>
 
@@ -35,7 +34,6 @@ class Heightmap :
     public GameObject
 {
 private:
-    Shader m_shader;
     int m_indices;
     siv::PerlinNoise m_perlin;
     
@@ -49,7 +47,11 @@ public:
     Heightmap(const std::string & path);
     ~Heightmap();
     virtual void update(float delta_time);
-    void render(const glm::mat4 &projection, const glm::mat4 &view);
+    virtual void render(
+        const glm::mat4 &projection,
+        const glm::mat4 &view,
+        const DirectionalLight &directional_light
+    );
 private:
     float map_height(double x, double y);
     glm::vec3 height_color(double x, double y);

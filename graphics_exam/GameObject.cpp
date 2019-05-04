@@ -15,6 +15,10 @@ void GameObject::update(float delta_time)
 {
 }
 
-void GameObject::render(const glm::mat4 &projection, const glm::mat4 &view)
+void GameObject::render(
+    const glm::mat4 &projection,
+    const glm::mat4 &view,
+    const DirectionalLight &directional_light
+)
 {
 }

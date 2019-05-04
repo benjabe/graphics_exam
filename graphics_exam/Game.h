@@ -5,6 +5,7 @@
 #include "Cube.h"
 #include "InputHandler.h"
 #include "Heightmap.h"
+#include "Light.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -36,6 +37,8 @@ private:
     glm::mat4 m_view;
     glm::mat4 m_projection;
 
+    // Lights
+    DirectionalLight m_directional_light;
 public:
     Game(unsigned int width, unsigned int height);
     ~Game();
