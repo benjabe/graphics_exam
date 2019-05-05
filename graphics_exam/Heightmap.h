@@ -54,7 +54,6 @@ public:
         const DirectionalLight &directional_light,
         const std::vector<PointLight> &point_lights
     );
-private:
     float map_height(double x, double y);
     glm::vec3 height_color(double x, double y);
 };

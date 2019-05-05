@@ -21,9 +21,7 @@ void Raindrop::update(float delta_time)
     if (m_time < 5.0f)
     {
         m_time += delta_time;
-        std::cout << m_time << '\n';
         m_speed += m_gravity * delta_time;
-        std::cout << '\t' << m_speed << '\n';
         m_position.y += m_speed * delta_time;
     }
 }

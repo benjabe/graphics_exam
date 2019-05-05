@@ -9,6 +9,7 @@
 #include "Model.h"
 #include "Raindrop.h"
 #include "WeatherController.h"
+#include "Deer.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>

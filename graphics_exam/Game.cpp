@@ -62,9 +62,12 @@ void Game::start()
     //m_game_objects.push_back(new Cube(cube_shader, "container2.jpg"));
 
     Shader shader("vertex.shader", "fragment.shader");
-    m_game_objects.push_back(new Heightmap(shader, 800, 800));
-    //m_game_objects.push_back(new WeatherController({ 0, 0, 0 }));
-    //m_game_objects.push_back(new Raindrop({ 0, 0, 0 }));
+    Heightmap *heightmap = new Heightmap(shader, 800, 800);
+    m_game_objects.push_back(heightmap);
+    m_game_objects.push_back(new Deer(
+        heightmap,
+        glm::vec3(0.0f, heightmap->map_height(0, 0), 0.0f)
+    ));
 
     // Add light
     m_directional_light = {
@@ -112,7 +115,6 @@ void Game::add_raindrop()
 {
     std::uniform_real_distribution<float> dis(-50.0f, 50.0f);
     glm::vec3 position = { 200.0f + dis(gen), 100, 200.0f + dis(gen) };
-    std::cout << "Raindrop spawned at " << glm::to_string(position) << '\n';
     m_game_objects.push_back(new Raindrop(position));
 }
 
