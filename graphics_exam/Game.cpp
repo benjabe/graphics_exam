@@ -1,13 +1,13 @@
 #include "Game.h"
 
 Camera camera;
+std::mt19937 gen;
 
 Game::Game(unsigned int width, unsigned int height)
 {
     m_width = width;
     m_height = height;
 
-    m_last_time = 0.0f;
 
     m_first_mouse = true;
     m_last_mouse_pos = glm::vec2(m_width / 2, m_height / 2);
@@ -63,7 +63,8 @@ void Game::start()
 
     Shader shader("vertex.shader", "fragment.shader");
     m_game_objects.push_back(new Heightmap(shader, 800, 800));
-    m_game_objects.push_back(new Raindrop());
+    //m_game_objects.push_back(new WeatherController({ 0, 0, 0 }));
+    //m_game_objects.push_back(new Raindrop({ 0, 0, 0 }));
 
     // Add light
     m_directional_light = {
@@ -73,9 +74,7 @@ void Game::start()
         { 0.6f, 0.6f, 0.6f }
     };
 
-    m_model = Model("Assets/Models/Raindrop/raindrop.obj");
-    m_model_shader = Shader("model_loading.vert", "model_loading.frag");
-
+    m_last_time = glfwGetTime();
     while (!glfwWindowShouldClose(m_window))
     {
         // Handle time
@@ -109,11 +108,25 @@ void Game::add_point_light(glm::vec3 position)
     });
 }
 
+void Game::add_raindrop()
+{
+    std::uniform_real_distribution<float> dis(-50.0f, 50.0f);
+    glm::vec3 position = { 200.0f + dis(gen), 100, 200.0f + dis(gen) };
+    std::cout << "Raindrop spawned at " << glm::to_string(position) << '\n';
+    m_game_objects.push_back(new Raindrop(position));
+}
+
 void Game::update(float delta_time)
 {
     for (GameObject *go : m_game_objects)
     {
         go->update(delta_time);
+    }
+
+    if (glfwGetTime() >= m_next_spawn_time)
+    {
+        add_raindrop();
+        m_next_spawn_time = glfwGetTime() + 1.0f / m_spawn_rate;
     }
 }
 
@@ -167,6 +180,7 @@ void Game::process_input(GLFWwindow *window, float delta_time)
         glfwSetWindowShouldClose(window, true);
     }
 
+    // Camera controls
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
         camera.process_keyboard(FORWARD, delta_time);

@@ -8,6 +8,7 @@
 #include "Light.h"
 #include "Model.h"
 #include "Raindrop.h"
+#include "WeatherController.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -44,6 +45,9 @@ private:
     std::vector<PointLight> m_point_lights;
     Model m_model;
     Shader m_model_shader;
+
+    float m_spawn_rate = 20.0f;
+    float m_next_spawn_time = 0.0f;
 public:
     Game(unsigned int width, unsigned int height);
     ~Game();
@@ -52,5 +56,7 @@ public:
     void render();
     void process_input(GLFWwindow *window, float delta_time);
     void add_point_light(glm::vec3 position);
+    void add_raindrop();
 };
 
+static Game game(1920, 1080);

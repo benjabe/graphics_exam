@@ -60,6 +60,9 @@
     <ClCompile Include="Raindrop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WeatherController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.shader">
@@ -116,6 +119,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Raindrop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

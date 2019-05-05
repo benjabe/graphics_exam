@@ -10,9 +10,10 @@ class Raindrop :
 private:
     Model m_model;
     float m_speed = 0.0f;
-    float m_gravity = -1.0f;
+    float m_gravity = -9.81f;
+    float m_time = 0.0f;
 public:
-    Raindrop();
+    Raindrop(glm::vec3 position);
     ~Raindrop();
     void update(float delta_time);
     virtual void render(

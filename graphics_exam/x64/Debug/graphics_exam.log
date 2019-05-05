@@ -1,11 +1,2 @@
-﻿  Game.cpp
-c:\dev\gfx\graphics_exam\dependencies\includes\perlinnoise.hpp(77): warning C4267: '=': conversion from 'size_t' to 'int32_t', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\game.cpp(82): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\game.cpp(122): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\dev\gfx\graphics_exam\graphics_exam\game.cpp(156): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\game.cpp(157): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Raindrop.cpp
-  main.cpp
-c:\dev\gfx\graphics_exam\dependencies\includes\perlinnoise.hpp(77): warning C4267: '=': conversion from 'size_t' to 'int32_t', possible loss of data
-  Generating Code...
+﻿  Raindrop.cpp
   graphics_exam.vcxproj -> C:\dev\gfx\graphics_exam\x64\Debug\graphics_exam.exe
