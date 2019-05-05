@@ -64,7 +64,7 @@ void Game::start()
     Shader shader("vertex.shader", "fragment.shader");
     Heightmap *heightmap = new Heightmap(shader, 800, 800);
     m_game_objects.push_back(heightmap);
-    m_game_objects.push_back(new Deer(
+    m_game_objects.push_back(m_deer = new Deer(
         heightmap,
         glm::vec3(0.0f, heightmap->map_height(0, 0), 0.0f)
     ));
@@ -183,25 +183,57 @@ void Game::process_input(GLFWwindow *window, float delta_time)
     }
 
     // Camera controls
+    Direction dir = NONE;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
-        camera.process_keyboard(FORWARD, delta_time);
+        dir = FORWARD;
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
-        camera.process_keyboard(BACKWARD, delta_time);
+        dir = BACKWARD;
     }
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
     {
-        camera.process_keyboard(LEFT, delta_time);
+        dir = LEFT;
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
-        camera.process_keyboard(RIGHT, delta_time);
+        dir = RIGHT;
+    }
+
+    if (dir != NONE)
+    {
+        if (m_camera_mode == FREELOOK)
+        {
+            camera.process_keyboard(dir, delta_time);
+        }
+        else
+        {
+            m_deer->process_keyboard(dir, delta_time, camera.get_front(), camera.get_right());
+            camera.set_position(m_deer->get_position() + camera.get_front() * 4.5f + glm::vec3(0.0f, 8.0f, 0.0f));
+        }
     }
 
     if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
     {
         add_point_light(camera.get_position());
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+    {
+        switch (m_camera_mode)
+        {
+        case FIRST_PERSON:
+            m_camera_mode = THIRD_PERSON;
+            break;
+        case THIRD_PERSON:
+            m_camera_mode = FREELOOK;
+            break;
+        case FREELOOK:
+            m_camera_mode = FIRST_PERSON;
+            break;
+        default:
+            m_camera_mode = FREELOOK;
+        }
     }
 }

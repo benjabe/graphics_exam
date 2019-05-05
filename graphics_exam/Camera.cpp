@@ -91,6 +91,21 @@ glm::vec3 Camera::get_position()
     return m_position;
 }
 
+glm::vec3 Camera::get_front()
+{
+    return m_front;
+}
+
+glm::vec3 Camera::get_right()
+{
+    return m_right;
+}
+
+void Camera::set_position(glm::vec3 position)
+{
+    m_position = position;
+}
+
 void Camera::update_camera_vectors()
 {
     m_front = glm::normalize(glm::vec3(

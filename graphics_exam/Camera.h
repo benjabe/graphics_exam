@@ -13,7 +13,8 @@ enum Direction
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    NONE
 };
 
 class Camera
@@ -46,6 +47,10 @@ public:
 
     glm::mat4 get_view_matrix();
     glm::vec3 get_position();
+    glm::vec3 get_front();
+    glm::vec3 get_right();
+    
+    void set_position(glm::vec3 position);
 private:
     void update_camera_vectors();
 };

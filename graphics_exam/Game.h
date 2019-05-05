@@ -22,6 +22,13 @@
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 
+enum CameraMode
+{
+    FIRST_PERSON,
+    THIRD_PERSON,
+    FREELOOK
+};
+
 class Game
 {
 private:
@@ -34,7 +41,7 @@ private:
     bool m_first_mouse;         // Whether this is the first time the mouse moved
     glm::vec2 m_last_mouse_pos; // Mouse position in the previous frame
 
-    Camera m_camera;            // The main (and likely only) camera
+    CameraMode m_camera_mode = FREELOOK;
     
     std::vector<GameObject*> m_game_objects;
 
@@ -49,6 +56,8 @@ private:
 
     float m_spawn_rate = 20.0f;
     float m_next_spawn_time = 0.0f;
+
+    Deer *m_deer;
 public:
     Game(unsigned int width, unsigned int height);
     ~Game();
