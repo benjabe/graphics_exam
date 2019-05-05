@@ -209,8 +209,12 @@ void Game::process_input(GLFWwindow *window, float delta_time)
         }
         else
         {
-            m_deer->process_keyboard(dir, delta_time, camera.get_front(), camera.get_right());
-            camera.set_position(m_deer->get_position() + camera.get_front() * 4.5f + glm::vec3(0.0f, 8.0f, 0.0f));
+            glm::vec3 front = glm::normalize(glm::vec3(camera.get_front().x, 0.0f, camera.get_front().z));
+            glm::vec3 right = glm::normalize(glm::vec3(camera.get_right().x, 0.0f, camera.get_right().z));
+            m_deer->process_keyboard(dir, delta_time, front, right);
+            camera.set_position(
+                m_deer->get_position() + glm::vec3(0.0f, 5.3f, 0.0f) //+ front * 3.5f
+            );
         }
     }
 

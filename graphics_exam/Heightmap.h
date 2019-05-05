@@ -36,6 +36,7 @@ class Heightmap :
 private:
     int m_vertices;
     siv::PerlinNoise m_perlin;
+    unsigned int m_trail_texture;
     
     // for height generation
     double m_xoffset = 0.01;
@@ -56,5 +57,6 @@ public:
     );
     float map_height(double x, double y);
     glm::vec3 height_color(double x, double y);
+    void add_trail(glm::ivec2 position);
 };
 

@@ -24,7 +24,7 @@ struct PointLight
     float linear;
     float quadratic;
 };
-#define MAX_POINT_LIGHTS 10
+#define MAX_POINT_LIGHTS 16
 
 vec3 calc_dir_light(DirectionalLight light, vec3 normal, vec3 view_dir);
 vec3 calc_point_light(PointLight light, vec3 normal, vec3 frag_pos, vec3 view_dir);

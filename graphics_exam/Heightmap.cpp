@@ -79,6 +79,91 @@ Heightmap::Heightmap(const Shader &shader, int width, int height)
                 vertices[index - i].normal = normal;
             }
         }
+
+        /* I should have studied music
+        // Set up deer trail
+        unsigned int framebuffer;
+        glGenFramebuffers(1, &framebuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+
+        glGenTextures(1, &m_trail_texture);
+        glBindTexture(GL_TEXTURE_2D, m_trail_texture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_trail_texture, 0);
+        GLenum draw_buffers[1] = { GL_COLOR_ATTACHMENT0 };
+        glDrawBuffers(1, draw_buffers);
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        {
+            std::cout << "ERROR::HEIGHTMAP::Framebuffer not complete: "
+                      << glCheckFramebufferStatus(GL_FRAMEBUFFER) << '\n';
+        }
+
+        float quad_vertices[] = {
+            // Pos     
+            0.0f, 1.0f,
+            1.0f, 0.0f, 
+            0.0f, 0.0f, 
+
+            0.0f, 1.0f, 
+            1.0f, 1.0f, 
+            1.0f, 0.0f
+        };
+
+        unsigned int vbo;
+        unsigned int vao;
+        glGenBuffers(1, &vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glGenVertexArrays(1, &vao);
+        glBindVertexArray(vao);
+        glBufferData(
+            GL_ARRAY_BUFFER,
+            sizeof(quad_vertices),
+            quad_vertices,
+            GL_STATIC_DRAW
+        );
+        glVertexAttribPointer(
+            0,
+            2,
+            GL_FLOAT,
+            GL_FALSE,
+            2 * sizeof(float),
+            (void*)0
+        );
+
+        Shader texture_drawing_shader("texture_drawing.vert", "texture_drawing.frag");
+        texture_drawing_shader.use();
+        glm::mat4 projection = glm::ortho(0, width, 0, height, -1, 1);
+        texture_drawing_shader.set_mat4("projection", projection);
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glViewport(0, 0, width, height);
+        const int PIXELS = 10;
+        glm::ivec2 pixels[PIXELS] = {
+            { 20, 20 },
+            { 21, 20 },
+            { 22, 21 },
+            { 22, 22 },
+            { 22, 23 },
+            { 22, 24 },
+            { 22, 25 },
+            { 22, 26 },
+            { 22, 27 },
+            { 22, 29 }
+        };
+        for (int i = 0; i < PIXELS; i++)
+        {
+            glm::mat4 model(1.0f);
+            model = glm::scale(model, glm::vec3(50.0f));
+            model = glm::translate(model, { pixels[i].x, pixels[i].y, 0 });
+            texture_drawing_shader.set_mat4("model", model);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+        }
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        */
     }
 
     glGenVertexArrays(1, &m_vao);
@@ -208,6 +293,8 @@ void Heightmap::render(
         string.str(std::string());
     }
 
+    m_shader.set_int("trail", m_trail_texture);
+
     // Draw the terrain 
     glDrawArrays(GL_TRIANGLES, 0, m_vertices);
 }
@@ -269,4 +356,12 @@ glm::vec3 Heightmap::height_color(double x, double y)
         result = COLOR_PEAK;
     }
     return result;
+}
+
+void Heightmap::add_trail(glm::ivec2 position)
+{
+    std::stringstream string;
+    int index = position.x * position.y;
+    string << "trail[" << index << ']';
+    m_shader.set_bool(string.str(), true);
 }

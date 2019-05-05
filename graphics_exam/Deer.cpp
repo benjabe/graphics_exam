@@ -8,6 +8,7 @@ Deer::Deer(Heightmap *heightmap, glm::vec3 position)
     m_position = position;
     m_shader = Shader("model_loading.vert", "model_loading.frag");
     m_model = Model("Assets/Models/Deer/deer.obj");
+
 }
 
 
@@ -43,6 +44,8 @@ void Deer::process_keyboard(Direction direction, float delta_time, glm::vec3 fro
         break;
     }
     m_position.y = m_heightmap->map_height(m_position.x, m_position.z);
+    m_rotation.y = acos(glm::dot(glm::vec3(0.0f, 1.0f, 0.0f), front));
+    m_heightmap->add_trail({ round(m_position.x), round(m_position.y) });
 }
 
 glm::vec3 Deer::get_position()
@@ -54,6 +57,7 @@ void Deer::render(const glm::mat4 & projection, const glm::mat4 & view, const gl
 {
     m_shader.use();
     glm::mat4 model(1.0f);
+    //model = glm::rotate(model, m_rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::translate(model, m_position);
     m_shader.set_mat4("model", model);
     m_shader.set_mat4("view", view);

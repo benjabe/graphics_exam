@@ -83,6 +83,12 @@
     <None Include="raindrop.frag">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="texture_drawing.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="texture_drawing.frag">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">

@@ -25,7 +25,7 @@ struct PointLight
     float linear;
     float quadratic;
 };
-#define MAX_POINT_LIGHTS 10
+#define MAX_POINT_LIGHTS 16
 
 vec3 calc_dir_light(DirectionalLight light, vec3 normal, vec3 view_dir);
 vec3 calc_point_light(PointLight light, vec3 normal, vec3 frag_pos, vec3 view_dir);
@@ -42,8 +42,11 @@ uniform DirectionalLight directional_light;
 uniform PointLight point_lights[MAX_POINT_LIGHTS];
 uniform int nr_point_lights;
 
+uniform sampler2D trail;
+
 void main()
 {
+    int trail_index = int(round(frag_pos.x)) * int(round(frag_pos.z));
     vec3 norm = normalize(normal);
     vec3 view_dir = normalize(view_pos - frag_pos);
 
@@ -54,6 +57,10 @@ void main()
         result += calc_point_light(point_lights[i], norm, frag_pos, view_dir);
     }
     result *= vertex_color;
+
+    // Apply trail colour
+    result *= vec3(texture(trail, vec2(frag_pos.x, frag_pos.z)));
+
     frag_color = vec4(result, 1.0);
 }
 
