@@ -77,6 +77,14 @@ void Game::start()
         { 0.6f, 0.6f, 0.6f }
     };
 
+    // ImGui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(m_window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
     m_last_time = glfwGetTime();
     while (!glfwWindowShouldClose(m_window))
     {

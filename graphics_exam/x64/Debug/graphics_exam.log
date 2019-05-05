@@ -1,5 +1,7 @@
-﻿  Heightmap.cpp
+﻿  Game.cpp
+c:\dev\gfx\graphics_exam\graphics_exam\game.cpp : fatal error C1041: cannot open program database 'C:\dev\gfx\graphics_exam\graphics_exam\x64\Debug\vc141.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  WeatherController.cpp
 c:\dev\gfx\graphics_exam\dependencies\includes\perlinnoise.hpp(77): warning C4267: '=': conversion from 'size_t' to 'int32_t', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(262): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\dev\gfx\graphics_exam\graphics_exam\heightmap.cpp(308): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  graphics_exam.vcxproj -> C:\dev\gfx\graphics_exam\x64\Debug\graphics_exam.exe
+  main.cpp
+c:\dev\gfx\graphics_exam\dependencies\includes\perlinnoise.hpp(77): warning C4267: '=': conversion from 'size_t' to 'int32_t', possible loss of data
+  Generating Code...
