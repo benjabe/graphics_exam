@@ -11,12 +11,12 @@
 #include "WeatherController.h"
 #include "Deer.h"
 
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
-#include <glm/glm.hpp>
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 #include <iostream>
 #include <vector> 
@@ -70,6 +70,7 @@ public:
     void process_input(GLFWwindow *window, float delta_time);
     void add_point_light(glm::vec3 position);
     void add_raindrop();
+    void show_gui();
 };
 
 static Game game(1920, 1080);
