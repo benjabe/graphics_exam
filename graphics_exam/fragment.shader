@@ -59,7 +59,7 @@ void main()
     result *= vertex_color;
 
     // Apply trail colour
-    result *= vec3(texture(trail, vec2(frag_pos.x, frag_pos.z)));
+    //result *= vec3(texture(trail, vec2(frag_pos.x, frag_pos.z)));
 
     frag_color = vec4(result, 1.0);
 }
